@@ -1,4 +1,5 @@
-FROM nvidia/cudagl:10.1-base-ubuntu18.04
+# FROM nvidia/cudagl:10.1-base-ubuntu18.04
+FROM nvidia/cuda:11.2.0-devel-ubuntu18.04
 
 LABEL Author="Or Fleisher <or.fleisher@nytimes.com>"
 LABEL Title="Blender in Docker"
