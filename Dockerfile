@@ -34,10 +34,10 @@ RUN apt-get update && apt-get install -y \
 	xz-utils
 
 # Download and install Blender
-RUN wget https://mirror.clarkson.edu/blender/release/Blender2.91/blender-2.91.0-linux64.tar.xz \ 
-	&& tar -xvf blender-2.91.0-linux64.tar.xz --strip-components=1 -C /bin \ 
-	&& rm -rf blender-2.91.0-linux64.tar.xz \ 
-	&& rm -rf blender-2.91.0-linux64 
+RUN wget https://mirror.clarkson.edu/blender/release/Blender2.91/blender-2.91.2-linux64.tar.xz \ 
+	&& tar -xvf blender-2.91.2-linux64.tar.xz --strip-components=1 -C /bin \ 
+	&& rm -rf blender-2.91.2-linux64.tar.xz \ 
+	&& rm -rf blender-2.91.2-linux64 
 
 # Download the Python source since it is not bundled with Blender
 RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \ 
