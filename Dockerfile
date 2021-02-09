@@ -26,7 +26,11 @@ RUN apt-get update && apt-get install -y \
 	libxxf86vm-dev \ 
 	libfontconfig1 \ 
 	libxrender1 \ 
-	libgl1-mesa-glx \ 
+	libgl1-mesa-glx \
+	pciutils \
+	vim \
+	linux-headers-generic \
+	nvidia-driver-460 \
 	xz-utils
 
 # Download and install Blender
