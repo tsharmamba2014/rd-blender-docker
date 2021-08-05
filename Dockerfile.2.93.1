@@ -3,7 +3,6 @@ FROM nvidia/cuda:11.2.0-devel-ubuntu18.04
 
 LABEL Author="Sangharsh Gautam <sang@zeg.ai>"
 LABEL Title="Blender in Docker"
-RUN ls -la /bin/
 
 # Enviorment variables
 ENV DEBIAN_FRONTEND noninteractive
@@ -46,6 +45,8 @@ RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \
 	&& cp -r Python-3.7.0/Include/* $BLENDER_PATH/python/include/python3.7m/ \
 	&& rm -rf Python-3.7.0.tgz \
 	&& rm -rf Python-3.7.0
+
+RUN ls -la /bin/
 
 # Blender comes with a super outdated version of numpy (which is needed for matplotlib / opencv) so override it with a modern one
 RUN rm -rf ${BLENDER_PATH}/python/lib/python3.7/site-packages/numpy
