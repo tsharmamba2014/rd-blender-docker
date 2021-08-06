@@ -47,6 +47,8 @@ RUN wget https://www.python.org/ftp/python/3.8.7/Python-3.8.7.tgz \
 # Blender comes with a super outdated version of numpy (which is needed for matplotlib / opencv) so override it with a modern one
 RUN rm -rf ${BLENDER_PATH}/python/lib//site-packages/numpy
 
+RUN ls -la /bin/2.93/python/bin
+
 # Must first ensurepip to install Blender pip3 and then new numpy
 RUN ${BLENDERPY} -m ensurepip && ${BLENDERPIP} install --upgrade pip && ${BLENDERPIP} install numpy
 
