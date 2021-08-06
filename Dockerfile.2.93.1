@@ -46,11 +46,6 @@ RUN wget https://mirror.clarkson.edu/blender/release/Blender2.93/blender-2.93.0-
 	&& rm -rf blender-2.93.0-linux-x64.tar.xz \ 
 	&& rm -rf blender-2.93.0-linux-x64 
 
-# copy python 3.7 from 2.92 to 2.93
-RUN rm -rf /bin/2.93/python/
-RUN cp -r /bin/2.92/python/ /bin/2.93/
-RUN rm -rf /bin/2.92
-
 # Download the Python source since it is not bundled with Blender
 RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \ 
 	&& tar -xzf Python-3.7.0.tgz \ 
@@ -63,6 +58,11 @@ RUN rm -rf ${BLENDER_PATH}/python/lib//site-packages/numpy
 
 # Must first ensurepip to install Blender pip3 and then new numpy
 RUN ${BLENDERPY} -m ensurepip && ${BLENDERPIP} install --upgrade pip && ${BLENDERPIP} install numpy mathutils
+
+# copy python 3.7 from 2.92 to 2.93
+RUN rm -rf /bin/2.93/python/
+RUN cp -r /bin/2.92/python/ /bin/2.93/
+RUN rm -rf /bin/2.92
 
 ENV BLENDERPIP "/bin/2.93/python/bin/pip3"
 ENV BLENDERPY "/bin/2.93/python/bin/python3.7m"
