@@ -33,11 +33,17 @@ RUN apt-get update && apt-get install -y \
 	nvidia-driver-460 \
 	xz-utils
 
-# Download and install Blender
+# Download and install Blender 2.92
 RUN wget https://mirror.clarkson.edu/blender/release/Blender2.92/blender-2.92.0-linux64.tar.xz \ 
 	&& tar -xvf blender-2.92.0-linux64.tar.xz --strip-components=1 -C /bin \ 
 	&& rm -rf blender-2.92.0-linux64.tar.xz \ 
 	&& rm -rf blender-2.92.0-linux64 
+
+# Download and install Blender 2.93.1
+RUN wget https://mirror.clarkson.edu/blender/release/Blender2.93/blender-2.93.0-linux-x64.tar.xz \ 
+	&& tar -xvf blender-2.93.0-linux-x64.tar.xz --strip-components=1 -C /bin \ 
+	&& rm -rf blender-2.93.0-linux-x64.tar.xz \ 
+	&& rm -rf blender-2.93.0-linux-x64 
 
 # Download the Python source since it is not bundled with Blender
 RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \ 
