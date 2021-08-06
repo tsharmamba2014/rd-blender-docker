@@ -39,6 +39,8 @@ RUN wget https://mirror.clarkson.edu/blender/release/Blender2.92/blender-2.92.0-
 	&& rm -rf blender-2.92.0-linux64.tar.xz \ 
 	&& rm -rf blender-2.92.0-linux64 
 
+RUN pip install wheel mathutils
+
 # Download and install Blender 2.93.1
 RUN wget https://mirror.clarkson.edu/blender/release/Blender2.93/blender-2.93.0-linux-x64.tar.xz \ 
 	&& tar -xvf blender-2.93.0-linux-x64.tar.xz --strip-components=1 -C /bin \ 
