@@ -31,7 +31,14 @@ RUN apt-get update && apt-get install -y \
 	vim \
 	linux-headers-generic \
 	nvidia-driver-460 \
-	xz-utils
+	xz-utils \
+	git \
+	python3-distutils
+
+RUN git clone https://gitlab.com/ideasman42/blender-mathutils.git
+WORKDIR blender-mathutils
+RUN python3 setup.py build
+RUN python3 setup.py install
 
 # Download and install Blender
 RUN wget https://mirror.clarkson.edu/blender/release/Blender2.93/blender-2.93.4-linux-x64.tar.xz \
