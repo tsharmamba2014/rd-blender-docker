@@ -17,7 +17,7 @@ ENV HW="GPU"
 # ENV PATH "$PATH:/bin/2.93/python/bin/"
 ENV BLENDER_PATH "/bin/2.93"
 ENV BLENDERPIP "/bin/2.93/python/bin/pip3"
-ENV BLENDERPY "/bin/2.93/python/bin/python3.7m
+ENV BLENDERPY "/bin/2.93/python/bin/python3.7m"
 
 
 # Install dependencies
