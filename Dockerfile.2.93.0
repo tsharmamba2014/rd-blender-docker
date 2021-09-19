@@ -71,5 +71,10 @@ RUN wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz \
 	&& rm -rf Python-3.9.1.tgz \
 	&& rm -rf Python-3.9.1
 
+
+# Must first ensurepip to install Blender pip3 and then new numpy
+RUN ${BLENDERPY} -m ensurepip && ${BLENDERPIP} install --upgrade pip && ${BLENDERPIP} install mathutils numpy
+
+
 # Set the working directory
 WORKDIR /
