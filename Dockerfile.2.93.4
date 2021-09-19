@@ -14,6 +14,12 @@ ENV BLENDERPIP "/bin/2.93/python/bin/pip3"
 ENV BLENDERPY "/bin/2.93/python/bin/python3.9"
 ENV HW="GPU"
 
+# Temp assignment
+ENV BLENDER_PATH_2_92 "/bin/2.92"
+ENV BLENDERPIP_2_92 "/bin/2.92/python/bin/pip3"
+ENV BLENDERPY_2_92 "/bin/2.92/python/bin/python3.7m"
+
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
 	wget \
@@ -31,14 +37,25 @@ RUN apt-get update && apt-get install -y \
 	vim \
 	linux-headers-generic \
 	nvidia-driver-460 \
-	xz-utils \
-	git \
-	python3-distutils
+	xz-utils
 
-RUN git clone https://gitlab.com/ideasman42/blender-mathutils.git
-WORKDIR blender-mathutils
-RUN python3 setup.py build
-RUN python3 setup.py install
+# Download and install Blender
+RUN wget https://mirror.clarkson.edu/blender/release/Blender2.92/blender-2.92.0-linux64.tar.xz \
+	&& tar -xvf blender-2.92.0-linux64.tar.xz --strip-components=1 -C /bin \
+	&& rm -rf blender-2.92.0-linux64.tar.xz \
+	&& rm -rf blender-2.92.0-linux64
+
+# Download the Python source since it is not bundled with Blender
+RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \
+	&& tar -xzf Python-3.7.0.tgz \
+	&& cp -r Python-3.7.0/Include/* $BLENDER_PATH_2_92/python/include/python3.7m/ \
+	&& rm -rf Python-3.7.0.tgz \
+	&& rm -rf Python-3.7.0
+
+
+
+# Must first ensurepip to install Blender pip3 and then new numpy
+RUN ${BLENDERPY_2_92} -m ensurepip && ${BLENDERPIP_2_92} install --upgrade pip && ${BLENDERPIP_2_92} install mathutils
 
 # Download and install Blender
 RUN wget https://mirror.clarkson.edu/blender/release/Blender2.93/blender-2.93.4-linux-x64.tar.xz \
@@ -53,11 +70,17 @@ RUN wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz \
 	&& rm -rf Python-3.9.1.tgz \
 	&& rm -rf Python-3.9.1
 
+RUN mv ${BLENDER_PATH_2_92}/python/lib/python3.7/site-packages/math* ${BLENDER_PATH}/python/lib/python3.9/site-packages/
+
+RUN rm -rf ${BLENDER_PATH_2_92}
+
 # Blender comes with a super outdated version of numpy (which is needed for matplotlib / opencv) so override it with a modern one
-RUN rm -rf ${BLENDER_PATH}/python/lib//site-packages/numpy
+RUN rm -rf ${BLENDER_PATH}/python/lib/python3.9/site-packages/numpy
+
 
 # Must first ensurepip to install Blender pip3 and then new numpy
 RUN ${BLENDERPY} -m ensurepip && ${BLENDERPIP} install --upgrade pip && ${BLENDERPIP} install numpy
+
 
 # Set the working directory
 WORKDIR /
