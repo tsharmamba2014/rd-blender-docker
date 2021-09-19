@@ -14,6 +14,12 @@ ENV BLENDERPIP_2_92 "/bin/2.92/python/bin/pip3"
 ENV BLENDERPY_2_92 "/bin/2.92/python/bin/python3.7m"
 ENV HW="GPU"
 
+# ENV PATH "$PATH:/bin/2.93/python/bin/"
+ENV BLENDER_PATH "/bin/2.93"
+ENV BLENDERPIP "/bin/2.93/python/bin/pip3"
+ENV BLENDERPY "/bin/2.93/python/bin/python3.7m
+
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
 	wget \
@@ -51,6 +57,19 @@ RUN rm -rf ${BLENDER_PATH_2_92}/python/lib/python3.7/site-packages/numpy
 
 # Must first ensurepip to install Blender pip3 and then new numpy
 RUN ${BLENDERPY_2_92} -m ensurepip && ${BLENDERPIP_2_92} install --upgrade pip && ${BLENDERPIP_2_92} install mathutils numpy
+
+# Download and install Blender
+RUN wget https://mirror.clarkson.edu/blender/release/Blender2.93/blender-2.93.4-linux-x64.tar.xz \
+	&& tar -xvf blender-2.93.4-linux-x64.tar.xz --strip-components=1 -C /bin \
+	&& rm -rf blender-2.93.4-linux-x64.tar.xz \
+	&& rm -rf blender-2.93.4-linux-x64
+
+# Download the Python source since it is not bundled with Blender
+RUN wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz \
+	&& tar -xzf Python-3.9.1.tgz \
+	&& cp -r Python-3.9.1/Include/* $BLENDER_PATH/python/include// \
+	&& rm -rf Python-3.9.1.tgz \
+	&& rm -rf Python-3.9.1
 
 # Set the working directory
 WORKDIR /
