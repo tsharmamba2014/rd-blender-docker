@@ -6,7 +6,7 @@ steps:
   - 'build'
   - '-t'
   - 'gcr.io/$PROJECT_ID/rd-blender-docker:$SHORT_SHA'
-  - '--file=./Dockerfile.2.93.0'
+  - '--file=./Dockerfile.2.93.4'
   - '.'
 
 # This step pushes the image to Container Registry
