@@ -38,7 +38,8 @@ RUN apt-get update && apt-get install -y \
 	linux-headers-generic \
 	nvidia-driver-460 \
 	xz-utils \
-	fuse
+	fuse \
+	git
 
 #install go (required for building gcsfuse)
 RUN wget -c https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
