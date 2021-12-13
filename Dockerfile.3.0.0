@@ -37,7 +37,24 @@ RUN apt-get update && apt-get install -y \
 	vim \
 	linux-headers-generic \
 	nvidia-driver-460 \
-	xz-utils
+	xz-utils \
+	fuse
+
+#install go (required for building gcsfuse)
+RUN wget -c https://dl.google.com/go/go1.17.5.linux-amd64.tar.gz
+RUN tar -xf go1.17.5.linux-amd64.tar.gz --directory /usr/local
+
+ENV GOROOT=/usr/local/go
+ENV PATH=$PATH:$GOROOT/bin
+
+# install gcsfuse
+RUN cd $GOROOT && GO111MODULE=auto go get -u -v --fix github.com/googlecloudplatform/gcsfuse
+RUN cp -r /root/go/bin $GOROOT
+RUN rm -rf /root/go
+
+#mount gbucket
+RUN mkdir -p /render
+
 
 # Download and install Blender
 RUN wget https://mirror.clarkson.edu/blender/release/Blender2.92/blender-2.92.0-linux64.tar.xz \
