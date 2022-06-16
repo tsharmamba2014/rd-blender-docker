@@ -76,7 +76,7 @@ RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \
 RUN ${BLENDERPY_2_92} -m ensurepip && ${BLENDERPIP_2_92} install --upgrade pip && ${BLENDERPIP_2_92} install mathutils
 
 # Download and install Blender
-RUN wget https://mirror.clarkson.edu/blender/release/Blender3.1/blender-3.2.0-linux-x64.tar.xz \
+RUN wget https://mirror.clarkson.edu/blender/release/Blender3.2/blender-3.2.0-linux-x64.tar.xz \
 	&& tar -xvf blender-3.2.0-linux-x64.tar.xz --strip-components=1 -C /bin \
 	&& rm -rf blender-3.2.0-linux-x64.tar.xz \
 	&& rm -rf blender-3.2.0-linux-x64
