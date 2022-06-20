@@ -1,7 +1,7 @@
 # FROM nvidia/cudagl:10.1-base-ubuntu18.04
 # FROM nvidia/cuda:11.2.0-devel-ubuntu18.04
-# FROM ubuntu:20.04
-FROM nvidia/cuda:11.0.3-runtime-ubuntu20.04
+# FROM nvidia/cuda:11.0.3-runtime-ubuntu20.04
+FROM ubuntu:20.04
 
 LABEL Title="Blender in Docker"
 
