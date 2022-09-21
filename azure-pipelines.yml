@@ -14,7 +14,7 @@ variables:
   imageRepository: 'zegcontainerregistry/rd-blender-docker'
   containerRegistry: 'zegcontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile.3.2.2'
-  tag: '$(Build.BuildId)'
+  tag: '3.2.2'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
